@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import './widgets/user_transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,22 +18,37 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+    
+    
   @override
   Widget build(BuildContext context) {
-	return Scaffold(
-		appBar: AppBar(title: Text('Expense Report'),),
-		body: Column(
-			children: <Widget>[
-				Container(
-					width: double.infinity,
-				  child: Card(
-					child: Text('CHART',textAlign: TextAlign.center,),
-				  	elevation: 5,
-				  	color: Colors.blue,),
-				),
-				Card(child: Text('TRANSCATION'),),
-			],
-		),
-	);
+    return Scaffold(
+        appBar: AppBar(title: Text('Expense Report'),actions: <Widget>[
+            IconButton(icon: Icon(Icons.add),onPressed: (){
+
+            },),
+            
+        ],),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(child: Icon(Icons.add),onPressed: (){
+
+        },),
+        body: SingleChildScrollView(
+                  child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                  Container(
+                      width: double.infinity,
+                    child: Card(
+                      child: Text('CHART',textAlign: TextAlign.center,),
+                        elevation: 5,
+                        color: Colors.blue,),
+                  ),
+                UserTransaction(),
+              ],
+          ),
+        ),
+    );
   }
 }
