@@ -31,7 +31,6 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(groupTransaction);
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
@@ -41,12 +40,15 @@ class Chart extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             for (var item in groupTransaction)
-              ChartBar(
-                  item['day'],
-                  item['amount'],
-                  (totalSpending == 0.0)
-                      ? 0.0
-                      : (item['amount'] as double) / totalSpending),
+              Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                    item['day'],
+                    item['amount'],
+                    (totalSpending == 0.0)
+                        ? 0.0
+                        : (item['amount'] as double) / totalSpending),
+              ),
           ],
         ),
       ),
