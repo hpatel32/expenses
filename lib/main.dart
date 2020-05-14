@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
       theme: ThemeData(
+		  errorColor: Colors.red,
         primarySwatch: Colors.teal,
         fontFamily: "OpenSans",
       ),
@@ -41,8 +42,16 @@ class _MyHomePageState extends State<MyHomePage> {
         }).toList();
     }
 
-	void addNewTransaction(String title,double amount){
-		var newTx = Transaction(title: title,amount: amount,tId: DateTime.now().toString(),date: DateTime.now());
+	void deleteTx(id){
+		setState(() {
+		  transactions.removeWhere((tx){
+			  return tx.tId == id;
+		  });
+		});
+	}
+
+	void addNewTransaction(String title,double amount, DateTime choosenDate){
+		var newTx = Transaction(tId: DateTime.now().toString(),title: title,amount: amount,date: choosenDate);
 		setState(() {
 		  transactions.add(newTx);
 		});
@@ -83,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                     Chart(recentTransaction),
-                    TransactionList(transactions:transactions),
+                    TransactionList(transactions:transactions,deletetx:deleteTx),
                 ],
             ),
         ),

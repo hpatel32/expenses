@@ -5,8 +5,9 @@ import 'package:intl/intl.dart';
 class TransactionList extends StatelessWidget {
  
 	final List<Transaction> transactions;
+	final Function deletetx;
 
-	TransactionList({this.transactions});
+	TransactionList({this.transactions,this.deletetx});
 	
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,11 @@ class TransactionList extends StatelessWidget {
 			  	),
 				title: Text(transactions[index].title,style: TextStyle(fontWeight: FontWeight.bold),),
 				subtitle: Text(DateFormat.yMMMd().format(transactions[index].date),style: TextStyle(color: Colors.grey,fontSize: 15),),
+				trailing: IconButton(icon: Icon(Icons.delete),
+				color: Theme.of(context).errorColor,
+				onPressed: (){
+					deletetx(transactions[index].tId);
+				}),
 		    	),
 		  );
 	    },
@@ -53,24 +59,3 @@ class TransactionList extends StatelessWidget {
 	  );
   }
 }
-// Card(child: Row(
-// 			children: <Widget>[
-// 				Container(
-// 					padding: EdgeInsets.all(5),
-// 					margin: EdgeInsets.symmetric(vertical: 10,horizontal: 15),
-// 					decoration: BoxDecoration(border: Border.all(color: Theme.of(context).primaryColor,width: 1)),
-// 					child: Text(
-// 						'\$${transactions[index].amount.toStringAsFixed(2)}',
-// 						style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,fontSize: 20),
-// 					),
-// 				),
-// 				Column(
-// 					crossAxisAlignment: CrossAxisAlignment.start,
-// 					children: <Widget>[
-// 						Text(transactions[index].title,
-// 						style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-// 						Text(DateFormat.yMMMd().format(transactions[index].date),style: TextStyle(color: Colors.grey,fontSize: 15),),
-// 					],
-// 				),
-// 			],
-// 		),)
